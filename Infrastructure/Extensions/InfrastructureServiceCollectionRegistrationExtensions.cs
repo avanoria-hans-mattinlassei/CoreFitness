@@ -8,9 +8,13 @@ namespace Infrastructure.Extensions;
 
 public static class InfrastructureServiceCollectionRegistrationExtensions
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration, IHostEnvironment env)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration, IHostEnvironment environment)
     {
-        services.AddPersistence(configuration, env);
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentNullException.ThrowIfNull(configuration);
+        ArgumentNullException.ThrowIfNull(environment);
+
+        services.AddPersistence(configuration, environment);
         services.AddIdentityServices();
         services.AddRepositories();
 
